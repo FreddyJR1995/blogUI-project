@@ -1,0 +1,28 @@
+.image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.image--small {
+  width: 50px;
+  height: 50px;
+}
+
+.image--medium {
+  width: 150px;
+  height: 150px;
+}
+
+.image--large {
+  width: 300px;
+  height: 300px;
+}
+
+.image--rounded {
+  border-radius: 8px;
+}
+
+.image--circle {
+  border-radius: 50%;
+}
