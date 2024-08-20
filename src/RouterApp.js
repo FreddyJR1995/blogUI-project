@@ -8,6 +8,8 @@ import RegisterPage from './pages/RegisterPage';
 import { useAuth } from './contexts/AuthProvider';
 import { PublicRoutes } from './routes/public';
 import { PrivateRoutes } from './routes/private';
+import MyArticles from './pages/MyArticles';
+import { CreateArticle } from './pages/CreateArticle';
 
 export const RouterApp = () => {
   const { isAuthenticated } = useAuth();
@@ -18,6 +20,11 @@ export const RouterApp = () => {
       {isAuthenticated ? (
         <>
           <Route path={PrivateRoutes.Home} element={<HomePage />} />
+          <Route path={PrivateRoutes.MyArticles} element={<MyArticles />} />
+          <Route
+            path={PrivateRoutes.CreateArticle}
+            element={<CreateArticle />}
+          />
           <Route
             path={PublicRoutes.Unauthorized}
             element={<UnauthorizedPage />}

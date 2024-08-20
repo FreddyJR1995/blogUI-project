@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  console.log('local fuera', localStorage.getItem('token'));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -28,7 +28,13 @@ export const AuthProvider = ({ children }) => {
         .catch((error) => {
           console.error('Failed to verify token:', error);
           localStorage.removeItem('token');
+          setIsAuthenticated(false);
+        })
+        .finally(() => {
+          setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   }, []);
 
@@ -68,7 +74,9 @@ export const AuthProvider = ({ children }) => {
     navigate('/');
   };
 
-  return (
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <AuthContext.Provider
       value={{ isAuthenticated, login, register, logout, user }}
     >

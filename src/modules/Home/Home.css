@@ -1,7 +1,7 @@
 .toolbar-button {
-  border: 1px solid rgba(153, 105, 105, 0.5);
-  border-radius: 20px;
-  color: black;
+  border: 1px solid rgba(153, 105, 105, 0.5) !important;
+  border-radius: 20px !important;
+  color: black !important;
   font-size: 15px;
   font-weight: 500;
   line-height: 26px;

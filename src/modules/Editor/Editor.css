@@ -1,0 +1,10 @@
+.custom-textarea {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5; 
+    padding: 10px;
+    border-radius: 5px; 
+    border: 1px solid #ccc;
+    height: 500px !important;
+  }
+  
