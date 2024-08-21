@@ -14,30 +14,19 @@ import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { Home } from '../modules/Home/Home';
 import { PrivateRoutes } from '../routes/private';
+import { useTags } from '../hooks/useTags/useTags';
 
 const HomePage = () => {
-  const [personName, setPersonName] = useState([]);
+  const [tag, setTag] = useState([]);
+  const { tags } = useTags();
   const navigate = useNavigate();
 
   const handleTagsToSearch = (event) => {
     const {
       target: { value },
     } = event;
-    setPersonName(typeof value === 'string' ? value.split(',') : value);
+    setTag(typeof value === 'string' ? value.split(',') : value);
   };
-
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
 
   return (
     <Home>
@@ -84,7 +73,7 @@ const HomePage = () => {
           <Select
             style={{ width: '100%' }}
             multiple
-            value={personName}
+            value={tag}
             onChange={handleTagsToSearch}
             input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
             renderValue={(selected) => {
@@ -98,9 +87,9 @@ const HomePage = () => {
               );
             }}
           >
-            {names.map((name) => (
-              <MenuItem key={name} value={name}>
-                {name}
+            {tags.map((item) => (
+              <MenuItem key={item.id} value={item.text}>
+                {item.text}
               </MenuItem>
             ))}
           </Select>
