@@ -18,7 +18,7 @@ const MyArticles = () => {
             letterSpacing: '0.25px',
           }}
         >
-          Create Article
+          My Articles
         </Typography>
       </Grid>
       <Fab

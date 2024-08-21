@@ -15,30 +15,29 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+import { useTags } from '../../hooks/useTags/useTags';
+import { useArticles } from '../../hooks/useArticles/useArticles';
 
 const converter = new Showdown.Converter();
 
 const Editor = () => {
   const [title, setTitle] = useState('');
-  // const [tags, setTags] = useState('');
+  const [labels, setLabels] = useState([]);
   const [selectedTab, setSelectedTab] = useState('write');
   const [content, setContent] = useState('');
+  const { tags } = useTags();
+  const { createArticle } = useArticles();
 
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
+  const handleAddTags = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setLabels(typeof value === 'string' ? value.split(',') : value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    createArticle(title, labels, content);
   };
 
   return (
@@ -60,8 +59,8 @@ const Editor = () => {
             <FormLabel>Tags</FormLabel>
             <Select
               multiple
-              value={[]}
-              onChange={() => {}}
+              value={labels}
+              onChange={handleAddTags}
               input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
               renderValue={(selected) => {
                 if (!Array.isArray(selected)) selected = [];
@@ -74,9 +73,9 @@ const Editor = () => {
                 );
               }}
             >
-              {names.map((name) => (
-                <MenuItem key={name} value={name}>
-                  {name}
+              {tags.map((item) => (
+                <MenuItem key={item.id} value={item.text}>
+                  {item.text}
                 </MenuItem>
               ))}
             </Select>
