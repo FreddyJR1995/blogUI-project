@@ -10,10 +10,10 @@ import { PublicRoutes } from './routes/public';
 import { PrivateRoutes } from './routes/private';
 import MyArticles from './pages/MyArticles';
 import { CreateArticle } from './pages/CreateArticle';
+import { ArticlePage } from './pages/ArticlePage';
 
 export const RouterApp = () => {
   const { isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
 
   return (
     <Routes>
@@ -30,6 +30,10 @@ export const RouterApp = () => {
             element={<UnauthorizedPage />}
           />
           <Route path="*" element={<Navigate to={PrivateRoutes.Home} />} />
+          <Route
+            path={`${PrivateRoutes.Article}/:articleId`}
+            element={<ArticlePage />}
+          />
         </>
       ) : (
         <>
