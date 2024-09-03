@@ -7,10 +7,11 @@ import {
   Grid,
   MenuItem,
   OutlinedInput,
+  Pagination,
   Select,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { Home } from '../modules/Home/Home';
@@ -23,7 +24,11 @@ const HomePage = () => {
   const [tag, setTag] = useState([]);
   const { tags } = useTags();
   const navigate = useNavigate();
-  const { articles } = useArticles();
+  const { articles, getArticles, page, pages } = useArticles();
+
+  useEffect(() => {
+    getArticles(page);
+  }, [page]);
 
   const handleTagsToSearch = (event) => {
     const {
@@ -36,6 +41,9 @@ const HomePage = () => {
     setTag([]);
   };
 
+  const handlePageChange = (event, value) => {
+    getArticles(value);
+  };
   return (
     <Home>
       <Typography
@@ -114,6 +122,15 @@ const HomePage = () => {
           <CardArticles articles={articles} />
         </Grid>
       </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <Pagination
+          count={pages}
+          page={page}
+          onChange={handlePageChange}
+          variant="outlined"
+          color="primary"
+        />
+      </Box>
     </Home>
   );
 };
