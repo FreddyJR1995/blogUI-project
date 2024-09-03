@@ -92,6 +92,7 @@ const Editor = () => {
         }
         classes={{
           textArea: 'custom-textarea',
+          preview: 'editor',
         }}
         childProps={{
           writeButton: {

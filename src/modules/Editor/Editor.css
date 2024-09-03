@@ -8,3 +8,7 @@
     height: 500px !important;
   }
   
+  .editor {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+  }

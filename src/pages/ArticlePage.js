@@ -29,29 +29,42 @@ export const ArticlePage = () => {
 
   return (
     <Home>
-      <Box sx={{ paddingLeft: '163px', paddingRight: '152px' }}>
-        {isLoading ? (
-          <Typography>Loading...</Typography>
-        ) : article ? (
-          <>
-            <Typography
-              sx={{
-                fontSize: '42px',
-                lineHeight: '52px',
-                letterSpacing: '-0.011em',
-                fontWeight: 700,
-                paddingBottom: '10px',
-              }}
-            >
-              {article.title}
-            </Typography>
-            <TagsByArticle tags={article.labels} />
-            <Divider />
-            <MarkdownViewer content={article.content} />
-          </>
-        ) : (
-          <Typography>No article found</Typography>
-        )}
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box
+          sx={{
+            minWidth: '780px',
+          }}
+        >
+          {isLoading ? (
+            <Typography>Loading...</Typography>
+          ) : article ? (
+            <>
+              <Typography
+                sx={{
+                  fontSize: '42px',
+                  lineHeight: '52px',
+                  letterSpacing: '-0.011em',
+                  fontWeight: 700,
+                  paddingBottom: '20px',
+                }}
+              >
+                {article.title}
+              </Typography>
+              <Typography
+                style={{
+                  fontSize: '16px',
+                  fontWeight: 400,
+                  paddingBottom: '20px',
+                }}
+              >{`Author: ${article.author.name} ${article.author.last_name}`}</Typography>
+              <TagsByArticle tags={article.labels} />
+              <Divider />
+              <MarkdownViewer content={article.content} />
+            </>
+          ) : (
+            <Typography>No article found</Typography>
+          )}
+        </Box>
       </Box>
     </Home>
   );
